@@ -32,45 +32,57 @@ import static org.junit.Assert.*;
  */
 public class TextTest {
 
-    @Test
-    public void testSmallText() {
-        Text text = new Text("Hallo du da");
+  @Test
+  public void testSmallText() {
+    Text text = new Text("Hallo du da");
 
-        assertEquals("Hallo", text.getNextWord());
-        assertEquals("Hallo", text.getActualWord());
-        assertEquals("du", text.getNextWord());
-        assertEquals("du", text.getActualWord());
-        assertEquals("da", text.getNextWord());
-        assertEquals("da", text.getActualWord());
-        assertNull(text.getNextWord());
+    assertEquals("Hallo", text.getNextWord());
+    assertEquals("Hallo", text.getActualWord());
+    assertEquals("du", text.getNextWord());
+    assertEquals("du", text.getActualWord());
+    assertEquals("da", text.getNextWord());
+    assertEquals("da", text.getActualWord());
+    assertNull(text.getNextWord());
+  }
+
+  @Test
+  public void testFreeText() {
+    Text text = new Text("   Hallo   du   da");
+
+    assertEquals("Hallo", text.getNextWord());
+    assertEquals("Hallo", text.getActualWord());
+    assertEquals("du", text.getNextWord());
+    assertEquals("du", text.getActualWord());
+    assertEquals("da", text.getNextWord());
+    assertEquals("da", text.getActualWord());
+    assertNull(text.getNextWord());
+  }
+
+  @Test
+  public void testTextNewLine() {
+    Text text = new Text("   Hallo   \n   du\n   da\nhaha");
+
+    assertEquals("Hallo", text.getNextWord());
+    assertEquals("Hallo", text.getActualWord());
+    assertEquals("du", text.getNextWord());
+    assertEquals("du", text.getActualWord());
+    assertEquals("da", text.getNextWord());
+    assertEquals("da", text.getActualWord());
+    assertEquals("haha", text.getNextWord());
+    assertEquals("haha", text.getActualWord());
+    assertNull(text.getNextWord());
+  }
+
+  @Test
+  public void testTextCompounds() {
+    Text text = new Text("Be- und entladen der Container-Schiffe am Zeilen-\numbruch.");
+    String[] words = {"Be-", "und", "entladen", "der", "Container-", "Schiffe", "am", "Zeilen-", "umbruch."};
+
+    for (String word : words) {
+      assertEquals(word, text.getNextWord());
+      assertEquals(word, text.getActualWord());
     }
-
-    @Test
-    public void testFreeText() {
-        Text text = new Text("   Hallo   du   da");
-
-        assertEquals("Hallo", text.getNextWord());
-        assertEquals("Hallo", text.getActualWord());
-        assertEquals("du", text.getNextWord());
-        assertEquals("du", text.getActualWord());
-        assertEquals("da", text.getNextWord());
-        assertEquals("da", text.getActualWord());
-        assertNull(text.getNextWord());
-    }
-    
-    @Test
-    public void testTextNewLine() {
-        Text text = new Text("   Hallo   \n   du\n   da\nhaha");
-
-        assertEquals("Hallo", text.getNextWord());
-        assertEquals("Hallo", text.getActualWord());
-        assertEquals("du", text.getNextWord());
-        assertEquals("du", text.getActualWord());
-        assertEquals("da", text.getNextWord());
-        assertEquals("da", text.getActualWord());
-        assertEquals("haha", text.getNextWord());
-        assertEquals("haha", text.getActualWord());
-        assertNull(text.getNextWord());
-    }
+    assertNull(text.getNextWord());
+  }
 
 }
