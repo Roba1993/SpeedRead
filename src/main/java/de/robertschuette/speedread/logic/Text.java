@@ -61,7 +61,9 @@ public class Text {
                 continue;
             }
 
-            end = nextDelimiter(text, "\n\t -", end);
+            int nextHyphen = nextDelimiter(text, "-", end);
+            int nextSpace = nextDelimiter(text, "\n\t ", end);
+            end = Math.min(nextHyphen+1, nextSpace);
             String word = this.text.substring(start, end).trim();
 
             if (!"".equals(word)) {

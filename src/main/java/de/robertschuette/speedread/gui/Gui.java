@@ -86,6 +86,8 @@ public class Gui extends JFrame {
             word.setWord(text.getActualWord());
 
             //Show the word
+            
+            wordBox.repaint();
             wordBox.writeWord(word);
             textBox.markWord(text.getWordStart(), text.getWordEnd());
             sleep(menu.getWPM());

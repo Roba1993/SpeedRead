@@ -78,12 +78,13 @@ public class WordBox extends JPanel {
         
         lastLabel.setText(word.getLast());
         lastLabel.setBounds(lastPos, 4, 200, 40);
-
+        
         repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         //top and bot line
         g.fillRect(0, 00, 300, 3);
         g.fillRect(0, 45, 300, 3);
