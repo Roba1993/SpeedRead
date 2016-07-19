@@ -24,7 +24,7 @@
         <version>3.0.1</version>
         <configuration>
           <outputDirectory>C:\Users\CSTROHMA\Documents\NetBeansProjects\SpeedRead\</outputDirectory>
-          <finalName>speedread.jar</finalName>
+          <finalName>speedread</finalName>
           <attach>false</attach>
         </configuration>
       </plugin>
