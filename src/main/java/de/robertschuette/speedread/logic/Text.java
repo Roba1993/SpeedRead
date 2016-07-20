@@ -23,6 +23,10 @@
  */
 package de.robertschuette.speedread.logic;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author Robert Schütte
@@ -57,7 +61,9 @@ public class Text {
                 continue;
             }
 
-            end = nextSpace(text, end);
+            int nextHyphen = nextDelimiter(text, "-", end);
+            int nextSpace = nextDelimiter(text, "\n\t ", end);
+            end = Math.min(nextHyphen+1, nextSpace);
             String word = this.text.substring(start, end).trim();
 
             if (!"".equals(word)) {
@@ -66,27 +72,13 @@ public class Text {
         }
     }
 
-    private int nextSpace(String text, int pos) {
-        int tmpNN = text.indexOf("\n", pos);
-        int tmpSpace = text.indexOf(" ", pos);
-
-        if (tmpNN == -1 && tmpSpace == -1) {
-            return text.length();
-        }
-
-        if (tmpNN == -1) {
-            return tmpSpace;
-        }
-
-        if (tmpSpace == -1) {
-            return tmpNN;
-        }
-
-        if (tmpNN > tmpSpace) {
-            return tmpSpace;
-        } else {
-            return tmpNN;
-        }
+    private int nextDelimiter(String text, String delimiters, int startPosition) {
+      List<Integer> positions = new ArrayList<>();
+      for (char delimiter: delimiters.toCharArray()) {
+        int pos = text.indexOf(delimiter, startPosition);
+        positions.add(pos>0?pos:text.length());
+      }  
+      return Collections.min(positions);
     }
 
     //Getter & Setter

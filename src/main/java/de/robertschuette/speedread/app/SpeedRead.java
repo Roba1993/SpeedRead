@@ -34,7 +34,7 @@ public class SpeedRead {
 
     public static void main(String args[]) {
         Gui gui = new Gui();
-        gui.setText("Hallo du da. Dies ist ein Test. Wie geht es dir heute? Alles gut?");
+        gui.setText("Hallo du da. Dies ist ein Test mit Nominal-Komposita. Wie geht es dir am Zeilen-\numbruch heute? Alles gut?");
         while (true) {
             gui.run();
         }
